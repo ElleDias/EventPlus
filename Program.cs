@@ -1,3 +1,4 @@
+using Microsoft.Azure.CognitiveServices.ContentModerator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -148,6 +149,14 @@ if (app.Environment.IsDevelopment())
         options.RoutePrefix = string.Empty;
     });
 }
+//aplicar o serviço
+// habilita o serviço de moderador de conteudo do microsoft azure
+
+builder.Services.AddSingleton(provider => new ContentModeratorClient(
+    new ApiKeyServiceClientCredentials("api key gerado no azure"))
+{
+    Endpoint = "adicionar o endpoint gerado no azure"
+});
 
 //Adiciona o Cors(política criada)
 app.UseCors("CorsPolicy");
