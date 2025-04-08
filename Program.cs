@@ -1,3 +1,5 @@
+using Azure;
+using Azure.AI.ContentSafety;
 using Microsoft.Azure.CognitiveServices.ContentModerator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -8,6 +10,16 @@ using webapi.event_.Interfaces;
 using webapi.event_.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+//configuração do azure student content safety
+var endpoint = "https://moderatorservicedanielle.cognitiveservices.azure.com/";
+var apiKey = "AxYOJxJ9M0zs4mVXHxZFst5sLsfktlEWW7QYR7SPtBRv7z0mtLsoJQQJ99BDACYeBjFXJ3w3AAAHACOGpqlq";
+
+var client = new ContentSafetyClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
+builder.Services.AddSingleton(client);
+
+//----------------------------------------------------------------------------------------------------------------------------
 
 builder.Services // Acessa a coleção de serviços da aplicação (Dependency Injection)
     .AddControllers() // Adiciona suporte a controladores na API (MVC ou Web API)
@@ -161,13 +173,11 @@ builder.Services.AddSingleton(provider => new ContentModeratorClient(
 //Adiciona o Cors(política criada)
 app.UseCors("CorsPolicy");
 
-//Adiciona o mapeamento dos controllers
+//Adicionar o mapeamento dos controllers
 app.MapControllers();
 
-//Adiciona a autenticação
 app.UseAuthentication();
 
-//Adiciona a autorização
 app.UseAuthorization();
 
 app.Run();
