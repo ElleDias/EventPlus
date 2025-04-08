@@ -46,6 +46,8 @@ namespace webapi.event_.Controllers
                 //se o conteudo for improprio, nao exibe, caso contrario, exibe
                 comentario.Exibe = !temConteudoImproprio;
                 _comentarioseventosRepository.Cadastrar(comentario);
+
+                return Ok();
     }
 	catch (Exception)
 	{
@@ -54,5 +56,62 @@ namespace webapi.event_.Controllers
 	}
 
         }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            try
+            {
+                _comentarioseventosRepository.Deletar(id);
+
+                return NoContent();
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+        }
+
+        [HttpGet("ListarSomenteExibe")]
+        public IActionResult GetExibe(Guid id)
+        {
+            try
+            {
+                return Ok(_comentarioseventosRepository.ListarSomenteExibe(id));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpGet]
+        public IActionResult Get(Guid id)
+        {
+            try
+            {
+                return Ok(_comentarioseventosRepository.Listar(id));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        [HttpGet("BuscarPorIdUsuario")]
+        public IActionResult GetByIdUser(Guid idUsuario, Guid idEvento)
+        {
+            try
+            {
+                return Ok(_comentarioseventosRepository.BuscarPorIdUsuario(idUsuario, idEvento));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

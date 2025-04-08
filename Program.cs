@@ -13,9 +13,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 //configuração do azure student content safety
-var endpoint = "https://moderatorservicedanielle.cognitiveservices.azure.com/";
-var apiKey = "AxYOJxJ9M0zs4mVXHxZFst5sLsfktlEWW7QYR7SPtBRv7z0mtLsoJQQJ99BDACYeBjFXJ3w3AAAHACOGpqlq";
-
+var endpoint = builder.Configuration["AzureContentSafety:Endpoint"];
+var apiKey = builder.Configuration["AzureContentSafety:ApiKey"];
+if(string.IsNullOrEmpty(endpoint) || string.IsNullOrEmpty(apiKey))
+        {
+    throw new InvalidOperationException("Azure Content Safety: Endpoint ou API key não foram configurados");
+}
 var client = new ContentSafetyClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
 builder.Services.AddSingleton(client);
 
@@ -42,6 +45,7 @@ builder.Services.AddScoped<ITiposEventosRepository, TiposEventosRepository>();
 builder.Services.AddScoped<IUsuarioRepository, UsuariosRepository>();
 builder.Services.AddScoped<IEventosRepository, EventosRepository>();
 builder.Services.AddScoped<IPresencasEventosRepository, PresencasEventosRepository>();
+builder.Services.AddScoped<IComentariosEventosRepository, ComentariosEventosRepository>();
 
 //Adiciona o serviço de Controllers
 builder.Services.AddControllers();
@@ -163,12 +167,6 @@ if (app.Environment.IsDevelopment())
 }
 //aplicar o serviço
 // habilita o serviço de moderador de conteudo do microsoft azure
-
-builder.Services.AddSingleton(provider => new ContentModeratorClient(
-    new ApiKeyServiceClientCredentials("api key gerado no azure"))
-{
-    Endpoint = "adicionar o endpoint gerado no azure"
-});
 
 //Adiciona o Cors(política criada)
 app.UseCors("CorsPolicy");
