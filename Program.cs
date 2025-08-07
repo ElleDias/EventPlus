@@ -1,5 +1,6 @@
 using Azure;
 using Azure.AI.ContentSafety;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
 using Microsoft.Azure.CognitiveServices.ContentModerator;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -13,14 +14,14 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 //configuração do azure student content safety
-var endpoint = builder.Configuration["AzureContentSafety:Endpoint"];
-var apiKey = builder.Configuration["AzureContentSafety:ApiKey"];
-if(string.IsNullOrEmpty(endpoint) || string.IsNullOrEmpty(apiKey))
-        {
-    throw new InvalidOperationException("Azure Content Safety: Endpoint ou API key não foram configurados");
-}
-var client = new ContentSafetyClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
-builder.Services.AddSingleton(client);
+//var endpoint = builder.Configuration["AzureContentSafety:Endpoint"];
+//var apiKey = builder.Configuration["AzureContentSafety:ApiKey"];
+//if (string.IsNullOrEmpty(endpoint) || string.IsNullOrEmpty(apiKey))
+//{
+//    throw new InvalidOperationException("Azure Content Safety: Endpoint ou API key não foram configurados");
+//}
+//var client = new ContentSafetyClient(new Uri(endpoint), new AzureKeyCredential(apiKey));
+//builder.Services.AddSingleton(client);
 
 //----------------------------------------------------------------------------------------------------------------------------
 
@@ -88,6 +89,9 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
+    //adicionar dentro de addSwaggerGen
+    options.ResolveConflictingActions(ApiDescriptions => ApiDescriptions.First());
+
     options.SwaggerDoc("v1", new OpenApiInfo
     {
         Version = "v1",
@@ -152,21 +156,42 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 
+//if (app.Environment.IsDevelopment())
+//{
+//    app.UseSwagger(options =>
+//    {
+//        options.SerializeAsV2 = true;
+//    });
+
+//    app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
+//    {
+//        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+//        options.RoutePrefix = string.Empty;
+//    });
+//}
+
+//adicionando configuracoes para realizar o deploy na azure
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger(options =>
-    {
-        options.SerializeAsV2 = true;
-    });
-
-    app.UseSwaggerUI(options => // UseSwaggerUI is called only in Development.
-    {
-        options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
-        options.RoutePrefix = string.Empty;
-    });
+    app.UseDeveloperExceptionPage();
 }
+
+app.UseSwagger(options =>
+{
+    options.SerializeAsV2 = true;
+});
+
+app.UseSwaggerUI(options =>
+{
+    options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+    options.RoutePrefix = string.Empty;
+});
 //aplicar o serviço
 // habilita o serviço de moderador de conteudo do microsoft azure
+
+//adicionar o uso dos recursos
+app.UseRouting();
 
 //Adiciona o Cors(política criada)
 app.UseCors("CorsPolicy");

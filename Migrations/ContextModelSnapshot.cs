@@ -126,8 +126,7 @@ namespace webapi.event_.Migrations
 
                     b.HasKey("IdPresencaEvento");
 
-                    b.HasIndex("IdEvento")
-                        .IsUnique();
+                    b.HasIndex("IdEvento");
 
                     b.HasIndex("IdUsuario");
 
@@ -237,8 +236,8 @@ namespace webapi.event_.Migrations
             modelBuilder.Entity("webapi.event_.Domains.PresencasEventos", b =>
                 {
                     b.HasOne("webapi.event_.Domains.Eventos", "Evento")
-                        .WithOne("PresencasEventos")
-                        .HasForeignKey("webapi.event_.Domains.PresencasEventos", "IdEvento")
+                        .WithMany("PresencasEventos")
+                        .HasForeignKey("IdEvento")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

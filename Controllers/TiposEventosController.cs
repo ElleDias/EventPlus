@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using webapi.event_.Domains;
 using webapi.event_.Interfaces;
@@ -75,6 +76,7 @@ namespace webapi.event_.Controllers
             }
         }
 
+        //[Authorize(Roles ="admin")]
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {

@@ -1,0 +1,893 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API de Eventos",
+    "description": "Aplicação para gerenciamento de eventos",
+    "termsOfService": "https://example.com/terms",
+    "contact": {
+      "name": "ElleDias",
+      "url": "https://github.com/ElleDias/EventPlus.git"
+    },
+    "license": {
+      "name": "Example License",
+      "url": "https://example.com/license"
+    },
+    "version": "v1"
+  },
+  "paths": {
+    "/api/ComentariosEventos": {
+      "post": {
+        "tags": [
+          "ComentariosEventos"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/ComentariosEventos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ComentariosEventos"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ComentariosEventos/{id}": {
+      "delete": {
+        "tags": [
+          "ComentariosEventos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ComentariosEventos/ListarSomenteExibe": {
+      "get": {
+        "tags": [
+          "ComentariosEventos"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/ComentariosEventos/BuscarPorIdUsuario": {
+      "get": {
+        "tags": [
+          "ComentariosEventos"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "idUsuario",
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "query",
+            "name": "idEvento",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Eventos": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Eventos"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Eventos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Eventos/ListarPorId": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Eventos/ListarProximos": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Eventos/{id}": {
+      "get": {
+        "tags": [
+          "Eventos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Eventos"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Eventos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Eventos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Login": {
+      "post": {
+        "tags": [
+          "Login"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/LoginDTO"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PresencasEventos": {
+      "get": {
+        "tags": [
+          "PresencasEventos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "PresencasEventos"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PresencasEventos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PresencasEventos/ListarMinhas/{id}": {
+      "get": {
+        "tags": [
+          "PresencasEventos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PresencasEventos/{id}": {
+      "put": {
+        "tags": [
+          "PresencasEventos"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/PresencasEventos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/PresencasEventos/BuscarPorId/{id}": {
+      "get": {
+        "tags": [
+          "PresencasEventos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TiposEventos": {
+      "get": {
+        "tags": [
+          "TiposEventos"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TiposEventos"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TiposEventos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TiposEventos/{id}": {
+      "get": {
+        "tags": [
+          "TiposEventos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TiposEventos"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TiposEventos"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TiposEventos"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TiposUsuarios": {
+      "get": {
+        "tags": [
+          "TiposUsuarios"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "TiposUsuarios"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TiposUsuarios"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/TiposUsuarios/{id}": {
+      "get": {
+        "tags": [
+          "TiposUsuarios"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TiposUsuarios"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/TiposUsuarios"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TiposUsuarios"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Usuario": {
+      "post": {
+        "tags": [
+          "Usuario"
+        ],
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/Usuarios"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ComentariosEventos": {
+      "required": [
+        "descricao",
+        "exibe",
+        "idEvento",
+        "idUsuario"
+      ],
+      "type": "object",
+      "properties": {
+        "idComentarioEvento": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "descricao": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "exibe": {
+          "type": "boolean"
+        },
+        "idUsuario": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "usuario": {
+          "$ref": "#/definitions/Usuarios"
+        },
+        "idEvento": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "evento": {
+          "$ref": "#/definitions/Eventos"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Eventos": {
+      "required": [
+        "dataEvento",
+        "descricao",
+        "nomeEvento"
+      ],
+      "type": "object",
+      "properties": {
+        "idEvento": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "dataEvento": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "nomeEvento": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "descricao": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "idTipoEvento": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "tiposEvento": {
+          "$ref": "#/definitions/TiposEventos"
+        },
+        "idInstituicao": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "instituicao": {
+          "$ref": "#/definitions/Instituicoes"
+        },
+        "presencasEventos": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PresencasEventos"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "Instituicoes": {
+      "required": [
+        "cnpj",
+        "endereco",
+        "nomeFantasia"
+      ],
+      "type": "object",
+      "properties": {
+        "idInstituicao": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "cnpj": {
+          "maxLength": 14,
+          "minLength": 0,
+          "type": "string"
+        },
+        "endereco": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "nomeFantasia": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LoginDTO": {
+      "required": [
+        "email",
+        "senha"
+      ],
+      "type": "object",
+      "properties": {
+        "email": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "senha": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "PresencasEventos": {
+      "required": [
+        "idEvento",
+        "idUsuario",
+        "situacao"
+      ],
+      "type": "object",
+      "properties": {
+        "idPresencaEvento": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "situacao": {
+          "type": "boolean"
+        },
+        "idUsuario": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "usuario": {
+          "$ref": "#/definitions/Usuarios"
+        },
+        "idEvento": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "evento": {
+          "$ref": "#/definitions/Eventos"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TiposEventos": {
+      "required": [
+        "tituloTipoEvento"
+      ],
+      "type": "object",
+      "properties": {
+        "idTipoEvento": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "tituloTipoEvento": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "TiposUsuarios": {
+      "required": [
+        "tituloTipoUsuario"
+      ],
+      "type": "object",
+      "properties": {
+        "idTipoUsuario": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "tituloTipoUsuario": {
+          "minLength": 1,
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "Usuarios": {
+      "required": [
+        "email",
+        "idTipoUsuario",
+        "nomeUsuario",
+        "senha"
+      ],
+      "type": "object",
+      "properties": {
+        "idUsuario": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "nomeUsuario": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "email": {
+          "minLength": 1,
+          "type": "string"
+        },
+        "senha": {
+          "maxLength": 60,
+          "minLength": 5,
+          "type": "string"
+        },
+        "idTipoUsuario": {
+          "format": "uuid",
+          "type": "string"
+        },
+        "tipoUsuario": {
+          "$ref": "#/definitions/TiposUsuarios"
+        }
+      },
+      "additionalProperties": false
+    }
+  },
+  "securityDefinitions": {
+    "Bearer": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header",
+      "description": "Value: Bearer TokenJWT "
+    }
+  },
+  "security": [
+    {
+      "Bearer": [ ]
+    }
+  ]
+}

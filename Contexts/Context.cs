@@ -32,7 +32,7 @@ namespace webapi.event_.Contexts
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer("Server = NOTE16-S28\\SQLEXPRESS; Database = EventPlus; User Id = sa; Pwd = Senai@134; TrustServerCertificate=true;");
+                optionsBuilder.UseSqlServer("Server=tcp:serverdbeventplusdanielle.database.windows.net,1433;Initial Catalog=db_eventPlus;Persist Security Info=False;User ID=eventplus;Password=Senai@134;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
             }
         }
     }
